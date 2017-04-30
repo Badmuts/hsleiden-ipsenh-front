@@ -9,8 +9,6 @@ import {
     Popover,
     Position
 } from "@blueprintjs/core";
-import 'normalize.css'
-import '@blueprintjs/core/dist/blueprint.css';
 
 const menu = (
     <Menu>
