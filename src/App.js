@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
     Button,
@@ -9,8 +8,6 @@ import {
     Popover,
     Position
 } from "@blueprintjs/core";
-import 'normalize.css'
-import '@blueprintjs/core/dist/blueprint.css';
 
 const menu = (
     <Menu>
@@ -23,20 +20,33 @@ const menu = (
 );
 
 class App extends Component {
+  name = "🍪";
+  
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <nav className="pt-navbar pt-dark">
+          <div className="pt-navbar-group pt-align-left">
+            <div className="pt-navbar-heading">{this.name}</div>
+            <button className="pt-button pt-minimal">Home</button>
+            <button className="pt-button pt-minimal">Files</button>
+          </div>
+          <div className="pt-navbar-group pt-align-right">
+            <input className="pt-input" placeholder="Search files..." type="text" />
+            <span className="pt-navbar-divider"></span>
+            <button className="pt-button pt-minimal pt-icon-user"></button>
+            <button className="pt-button pt-minimal pt-icon-notifications"></button>
+            <Popover content={menu} position={Position.BOTTOM_RIGHT}>
+              <Button className="pt-minimal" iconName="cog" />
+            </Popover>
+          </div>
+        </nav>
+        <div className="Container">
+          <h1>Welcome</h1>
+          <p>Dit smaakt naar gravel 🍜</p>
+          <p>The next level 🎮</p>
+          <iframe width="100%" height="720" src="//www.youtube.com/embed/aZKyWjElfCE" frameborder="0" allowfullscreen></iframe>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h2>Blueprint.js button:</h2>
-        <Popover content={menu} position={Position.BOTTOM_RIGHT}>
-            <Button text="Actions" />
-        </Popover>
       </div>
     );
   }
