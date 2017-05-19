@@ -17,10 +17,12 @@ script:
   - yarn test
   - yarn run build
   - make build
+  - make push
 
-deploy:
-  provider: script
-  script: operations/scripts/push.sh
+# Currently disable this so every commit is pushed to the hub
+# deploy:
+#   provider: script
+#   script: operations/scripts/push.sh
 
 notifications:
   slack:
