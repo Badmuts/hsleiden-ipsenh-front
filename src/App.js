@@ -1,44 +1,28 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import {
-    Button,
-    Menu,
-    MenuItem,
-    MenuDivider,
-    Popover,
-    Position
-} from "@blueprintjs/core";
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
-const menu = (
-    <Menu>
-        <MenuItem text="New" />
-        <MenuItem text="Open" />
-        <MenuItem text="Save" />
-        <MenuDivider />
-        <MenuItem text="Settings..." />
-    </Menu>
-);
+import Nav from './components/Nav'
 
-class App extends Component {
-  name = "🍪";
-  
+import Home from './pages/Home'
+import Buildings from './pages/Buildings'
+
+class App extends Component{
   render() {
     return (
-      <div className="App">
-        <nav className="pt-navbar pt-dark">
-          <div className="pt-navbar-group pt-align-left">
-            <div className="pt-navbar-heading">{this.name}</div>
-            <button className="pt-button pt-minimal">Home</button>
-          </div>
-          <div className="pt-navbar-group pt-align-right">
-            <Popover content={menu} position={Position.BOTTOM_RIGHT}>
-              <Button className="pt-minimal" iconName="cog" />
-            </Popover>
-          </div>
-        </nav>
-      </div>
-    );
+      <Router>
+        <div className="App">
+          <Nav />
+
+          <Route exact path="/" component={Home}/>
+          <Route path="/buildings" component={Buildings}/>
+        </div>
+      </Router>
+    )
   }
 }
 
-export default App;
+export default App
