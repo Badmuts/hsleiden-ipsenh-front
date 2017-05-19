@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+language: node_js
+node_js: "7"
+
+before_script:
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+script:
+ - yarn test
+ - yarn run build
+
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push USER/REPO;
+    fi
