@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
-
+import {Link} from 'react-router-dom'
 class Buildings extends Component {
     state = {
         buildings: null
@@ -22,7 +22,7 @@ class Buildings extends Component {
                 {buildings ? (
                     buildings.map(building => (
                         <div className="pt-card pt-elevation-0 pt-interactive">
-                            <h5>{building.name}</h5>
+                            <Link to="rooms"><h5>{building.name}</h5></Link>
                             <p>{building.location}</p>
                         </div>
                     ))
