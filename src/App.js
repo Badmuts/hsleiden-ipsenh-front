@@ -10,6 +10,7 @@ import Nav from './components/Nav'
 import Home from './pages/Home'
 import Buildings from './pages/Buildings'
 import Rooms from './pages/Rooms'
+import Room from './pages/Room'
 
 class App extends Component{
   render() {
@@ -21,6 +22,7 @@ class App extends Component{
           <Route path="/" component={Home} exact/>
           <Route path="/buildings" component={Buildings}/>
           <Route path="/rooms/:buildingId" component={Rooms}/>
+          <Route path="/rooms/:buildingId/rooms/:roomId" component={Room}/>
         </div>
       </Router>
     )
