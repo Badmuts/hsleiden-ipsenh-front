@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 
 class Rooms extends Component {
-    state = {
-        rooms: null,
-    }
+    state = {rooms: null}
 
     componentDidMount() {
-        fetch('http://localhost:3000/buildings/591ef303932c2b007938a88c/rooms')
+        console.log();
+        fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms`)
             .then(res => res.json())
             .then(rooms => {
                 this.setState({ rooms })
