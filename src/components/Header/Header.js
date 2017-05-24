@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import img from './hsleiden.jpg';
+import './Header.css';
 
 class Header extends Component {
     render() {
@@ -21,11 +22,11 @@ class Header extends Component {
 
         const image = {
             backgroundColor: 'rgba(0, 0, 0, 0.75)',
-            backgroundImage: `url(${this.props.bgImg || img})`,
+            backgroundImage: (this.props.title) ? `url(${this.props.bgImg || img})` : 'none',
             backgroundSize: 'cover',
             backgroundPosition: '0 -90px',
             backgroundBlendMode: 'darken',
-            minHeight: '380px'
+            minHeight: (this.props.title) ? '380px' : '180px'
         };
 
         const content = {
@@ -39,13 +40,19 @@ class Header extends Component {
 
         return (
             <div>
-                {this.props.nav}
+                {this.props.topNav  && (
+                    <div className="header-nav">
+                        {this.props.topNav}
+                    </div>
+                )}
                 <div style={wrapper}>
                     <div style={colorFilter}></div>
                     <div style={image}></div>
                 </div>
                 <div style={content}>
-                    <h1 style={{ background: 'white', padding: '5px 10px 3px 3px', fontFamily: 'PT Sans', fontWeight: '700', fontSize: '4.5em', display: 'inline-block'}}>{this.props.title}</h1>
+                    {this.props.title && (
+                        <h1 style={{ background: 'white', padding: '5px 10px 3px 3px', fontFamily: 'PT Sans', fontWeight: '700', fontSize: '4.5em', display: 'inline-block'}}>{this.props.title}</h1>
+                    )}
                     {this.props.children}
                 </div>
             </div>

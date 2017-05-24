@@ -6,11 +6,10 @@ import {
   Route
 } from 'react-router-dom'
 
-import Nav from './components/Nav'
+import Footer from './components/Footer'
+
 import Home from './containers/Home'
 import Buildings from './containers/Buildings'
-
-import Footer from './components/Footer'
 
 import pkg from './../package.json';
 
@@ -20,7 +19,7 @@ class App extends Component{
       <Router>
         <div>
           <div className="App">
-            <Nav />
+            {/*<Nav />*/}
 
             <Route exact path="/" component={Home}/>
             <Route path="/buildings" component={Buildings}/>
