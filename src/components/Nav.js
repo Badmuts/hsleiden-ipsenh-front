@@ -21,11 +21,15 @@ const menu = (
     </Menu>
 );
 
-const wrapper = {position: 'relative'};
+const wrapper = {
+    position: 'relative',
+    transform: 'skewY(-3deg)',
+    marginTop: '-30px'
+};
 const colorFilter = {
     position: 'absolute',
     backgroundColor: '#1539CF',
-    backgroundBlendMode: 'color',
+    mixBlendMode: 'color',
     zIndex: 10,
     width: '100%',
     height: '100%'
@@ -47,7 +51,7 @@ class Nav extends Component {
             <div>
                 <div className="header">
                     <div style={wrapper}>
-                        {/*<div style={colorFilter}></div>*/}
+                        <div style={colorFilter}></div>
                         <div style={image}></div>
                     </div>
                 </div>
