@@ -16,6 +16,9 @@ class Buildings extends Component {
             .then(buildings => {
                 this.setState({ buildings })
             })
+            .catch(err => {
+                this.setState({ err })
+            })
     }
     
     render() {
