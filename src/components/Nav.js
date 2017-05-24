@@ -26,27 +26,39 @@ class Nav extends Component {
         name: "Stuxnet."
     }
 
+    nav() {
+        return (
+            <nav className="pt-navbar pt-dark">
+                <div className="pt-navbar-group pt-align-left">
+                    <div className="pt-navbar-heading">{this.state.name}</div>
+                </div>
+                <div className="pt-navbar-group pt-align-right">
+                    <Link className="pt-button pt-minimal" to="/">Home</Link>
+                    <Link className="pt-button pt-minimal" to="/buildings">Buildings</Link>
+                    <Popover content={menu} position={Position.BOTTOM_RIGHT}>
+                        <Button className="pt-minimal" iconName="cog" />
+                    </Popover>
+                </div>
+            </nav>
+        )
+    }
+
     render() {
         return (
-            <div>
-                <div>
-                    <nav className="pt-navbar pt-dark">
-                        <div className="Container">
-                            <div className="pt-navbar-group pt-align-left">
-                                <div className="pt-navbar-heading">{this.state.name}</div>
-                            </div>
-                            <div className="pt-navbar-group pt-align-right">
-                                <Link className="pt-button pt-minimal" to="/">Home</Link>
-                                <Link className="pt-button pt-minimal" to="/buildings">Buildings</Link>
-                                <Popover content={menu} position={Position.BOTTOM_RIGHT}>
-                                    <Button className="pt-minimal" iconName="cog" />
-                                </Popover>
-                            </div>
-                        </div>
-                    </nav>
-                    <Header />
-                </div>
-            </div>
+            <Header title="Zernikedreef" nav={this.nav()}>
+                <nav className="pt-navbar">
+                    <div className="pt-navbar-group pt-align-left">
+                        <input className="pt-input" placeholder="Zoeken..." type="text" />
+                    </div>
+                    <div className="pt-navbar-group pt-align-right">
+                        <Link className="pt-button pt-minimal" to="/">Home</Link>
+                        <Link className="pt-button pt-minimal" to="/buildings">Buildings</Link>
+                        <Popover content={menu} position={Position.BOTTOM_RIGHT}>
+                            <Button className="pt-minimal" iconName="cog" />
+                        </Popover>
+                    </div>
+                </nav>
+            </Header>
         )
     }
 }
