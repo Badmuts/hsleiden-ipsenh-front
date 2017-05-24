@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 
+const style = {
+  padding: '30px 50px'
+};
+
 class Buildings extends Component {
     state = {
         buildings: null
-    }
+    };
 
     componentDidMount() {
         fetch('http://localhost:3000/buildings')
@@ -15,9 +19,10 @@ class Buildings extends Component {
     }
     
     render() {
-        const { buildings } = this.state
+        const { buildings } = this.state;
+        
         return (
-            <div className="Container p-30">
+            <div style={style}>
                 <h2>Buildings</h2>
                 {buildings ? (
                     buildings.map(building => (
