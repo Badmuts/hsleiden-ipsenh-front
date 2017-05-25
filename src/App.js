@@ -27,7 +27,7 @@ class App extends Component{
           <Route path="/" component={Home} exact/>
           <Route path="/buildings" component={Buildings}/>
           <Route path="/rooms/:buildingId" component={Rooms}/>
-          <Route path="/rooms/:buildingId/rooms/:roomId" component={Room}/>
+          <Route path="/rooms/:buildingId/:roomId" component={Room}/>
 
           </div>
           <Footer version={pkg.version}/>

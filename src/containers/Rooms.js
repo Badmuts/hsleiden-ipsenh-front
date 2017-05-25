@@ -30,7 +30,7 @@ class Rooms extends Component {
            
 
         return (
-             <div>
+            <div>
                 <Header topNav={this.renderNav()} title="Rooms">
                     <nav className="pt-navbar">
                         <div className="pt-navbar-group pt-align-left">
@@ -42,22 +42,22 @@ class Rooms extends Component {
                     </nav>
                 </Header>
 
-            <div style={style}>
-                <h2>Rooms</h2>
-                {rooms ? (
-                    rooms.map(room => (
-                        <Link to={`/rooms/${this.props.match.params.buildingId}/rooms/${room.id}`}>
-                            <div className="pt-card pt-elevation-0 pt-interactive">
-                                <h5>{room.name}</h5>
-                                <p>Occupation: {room.occupation}</p>
-                            </div>
-                        </Link>
-                    ))
-                ) : (
-                    <Spinner />
-                )}
+                <div style={style}>
+                    <h2>Rooms</h2>
+                    {rooms ? (
+                        rooms.map(room => (
+                            <Link to={`/rooms/${this.props.match.params.buildingId}/${room.id}`}>
+                                <div className="pt-card pt-elevation-0 pt-interactive">
+                                    <h5>{room.name}</h5>
+                                    <p>Occupation: {room.occupation}</p>
+                                </div>
+                            </Link>
+                        ))
+                    ) : (
+                        <Spinner />
+                    )}
+                </div>
             </div>
-        </div>
         )
     }
 }
