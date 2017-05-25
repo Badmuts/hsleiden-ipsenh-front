@@ -1,24 +1,30 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
 
-import Nav from './components/Nav'
+import Footer from './components/Footer'
 
-import Home from './pages/Home'
-import Buildings from './pages/Buildings'
+import Home from './containers/Home'
+import Buildings from './containers/Buildings'
+
+import pkg from './../package.json';
 
 class App extends Component{
   render() {
     return (
       <Router>
-        <div className="App">
-          <Nav />
+        <div>
+          <div className="App">
+            {/*<Nav />*/}
 
-          <Route exact path="/" component={Home}/>
-          <Route path="/buildings" component={Buildings}/>
+            <Route exact path="/" component={Home}/>
+            <Route path="/buildings" component={Buildings}/>
+          </div>
+          <Footer version={pkg.version}/>
         </div>
       </Router>
     )
