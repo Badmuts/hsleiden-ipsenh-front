@@ -1,0 +1,22 @@
+.header-nav {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    width: 940px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background: transparent;
+}
+
+.header-nav .pt-navbar {
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'PT Sans';
+    box-shadow: none;
+}
+
+.header-nav .pt-navbar .pt-button {
+    color: white;
+    font-size: 0.85em;
+}

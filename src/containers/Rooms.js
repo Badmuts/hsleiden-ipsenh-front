@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Header from './../components/Header';
+import Nav from './../components/Nav';
+
+const style = {
+  padding: '30px 50px'
+};
+
 class Rooms extends Component {
     state = {rooms: null}
 
@@ -14,12 +21,28 @@ class Rooms extends Component {
     }
     
 
+    renderNav() {
+      return (<Nav />)
+    }
 
     render() {
         const { rooms } = this.state
-  
+           
+
         return (
-            <div className="Container p-30">
+             <div>
+                <Header topNav={this.renderNav()} title="Rooms">
+                    <nav className="pt-navbar">
+                        <div className="pt-navbar-group pt-align-left">
+                            <div className="pt-input-group .modifier">
+                                <span className="pt-icon pt-icon-filter"></span>
+                                <input type="text" className="pt-input" placeholder="Zoeken..." />
+                            </div>
+                        </div>
+                    </nav>
+                </Header>
+
+            <div style={style}>
                 <h2>Rooms</h2>
                 {rooms ? (
                     rooms.map(room => (
@@ -34,6 +57,7 @@ class Rooms extends Component {
                     <Spinner />
                 )}
             </div>
+        </div>
         )
     }
 }

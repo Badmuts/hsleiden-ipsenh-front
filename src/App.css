@@ -1,13 +1,6 @@
 .App {
-  /*background-color: white;*/
-  /*box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px 0;*/
-}
-
-.Container {
-  width: 1370px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px 0;
+  width: 940px;
   margin: 0 auto;
-}
-
-.p-30 {
-  padding: 30px 15px;
 }
