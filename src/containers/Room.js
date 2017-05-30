@@ -3,47 +3,32 @@ import {Spinner} from '@blueprintjs/core';
 import Moment from 'moment';
 var BarChart = require("react-chartjs").Bar;
 import _ from 'lodash'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-var chartData = {
-    labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-    "19", "20", "21", "22", "23"],
-    datasets: [
-        {
-            fillColor: "#79D1CF",
-            strokeColor: "#79D1CF",
-            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        }
-    ]
-};
 
-var chartOptions = {
-    scales: {
-        yAxes: [{
-            id: 'y-axis-1',
-            display: true,
-            position: 'left',
-            scaleLabel:{
-                display: true,
-                labelString: 'Occupation',
-            }
-        }],
-        xAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Hour'
-          }
-        }],
-    }
-};
 class Room extends Component {
-    state = {room: null}
+    constructor (props) {
+        super(props)
+        this.state = {
+            room: null,
+            startDate: Moment()
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(date) {
+        this.setState({
+            startDate: date
+        });
+    }
     
     componentDidMount() {
         console.log();
         fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms/${this.props.match.params.roomId}`)
             .then(res => res.json())
             .then(room => {
-                this.setState({ room })
+                this.setState({ room: room })
             })
     }
     
@@ -53,10 +38,42 @@ class Room extends Component {
         Moment.locale('nl');
         const { room } = this.state
 
+        var chartData = {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+            "19", "20", "21", "22", "23"],
+            datasets: [
+                {
+                    fillColor: "#79D1CF",
+                    strokeColor: "#79D1CF",
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                }
+            ]
+        };
+
+        var chartOptions = {
+            scales: {
+                yAxes: [{
+                    id: 'y-axis-1',
+                    display: true,
+                    position: 'left',
+                    scaleLabel:{
+                        display: true,
+                        labelString: 'Occupation',
+                    }
+                }],
+                xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Hour'
+                }
+                }],
+            }
+        };
+
         this.logs = function() {
             return room.logs.map(log => {
-                var today = Moment().format('D');
-                if(Moment(log.time).format('D') === today) {
+                // var today = Moment().format('D');
+                if(Moment(log.time).format('D') === this.state.startDate.format('D')) {
 
                 //check if index is already filled with an occupation
                 //if so calculate new average. else add occupation to data array
@@ -94,6 +111,10 @@ class Room extends Component {
                  {room ? (    
                 <div className="pt-card pt-elevation-0 pt-interactive">
                     <h5>{room.name}</h5>
+                    Kies een datum = <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                    />
                     <ul>{this.logs()}</ul>
                     {this.chart()}
                 </div>
