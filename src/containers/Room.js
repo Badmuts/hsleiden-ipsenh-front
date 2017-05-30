@@ -46,11 +46,18 @@ class Room extends Component {
                     fillColor: "#79D1CF",
                     strokeColor: "#79D1CF",
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                },
+                {
+                    fillColor: "#7af442",
+                    strokeColor: "#7af442",
+                    data: [0,0,0,0,0,0,0,4,25,10,10,0,18,0,0,0,0,0,0,0,0,0,10,0]
                 }
             ]
         };
 
         var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
                 yAxes: [{
                     id: 'y-axis-1',
