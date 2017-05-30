@@ -17,10 +17,20 @@ var chartData = {
 var chartOptions = {
     scales: {
         yAxes: [{
-            ticks: {
-                beginAtZero:true
+            id: 'y-axis-1',
+            display: true,
+            position: 'left',
+            scaleLabel:{
+                display: true,
+                labelString: 'Occupation',
             }
-        }]
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Hour'
+          }
+        }],
     }
 };
 class Room extends Component {
