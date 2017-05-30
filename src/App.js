@@ -11,6 +11,7 @@ import Footer from './components/Footer'
 import Home from './containers/Home'
 import Buildings from './containers/Buildings'
 import Hubs from './containers/Hubs'
+import HubsDetails from './containers/HubsDetails'
 
 import pkg from './../package.json';
 
@@ -20,11 +21,10 @@ class App extends Component{
       <Router>
         <div>
           <div className="App">
-            {/*<Nav />*/}
-
             <Route exact path="/" component={Home}/>
             <Route path="/buildings" component={Buildings}/>
-            <Route path="/hubs" component={Hubs}/>
+            <Route exact name="hubs" path="/hubs" component={Hubs}/>
+            <Route name="hub-detail" path="/hubs/:id" component={HubsDetails}/>
           </div>
           <Footer version={pkg.version}/>
         </div>
