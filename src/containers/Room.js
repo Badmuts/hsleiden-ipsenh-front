@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 import Moment from 'moment';
-var BarChart = require("react-chartjs").Bar;
+import { Bar as BarChart } from 'react-chartjs';
 import _ from 'lodash'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
