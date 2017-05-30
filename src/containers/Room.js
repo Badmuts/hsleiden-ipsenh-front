@@ -2,14 +2,16 @@ import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 import Moment from 'moment';
 var BarChart = require("react-chartjs").Bar;
+import _ from 'lodash'
 
 var chartData = {
-    labels: [],
+    labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+    "19", "20", "21", "22", "23"],
     datasets: [
         {
             fillColor: "#79D1CF",
             strokeColor: "#79D1CF",
-            data: []
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         }
     ]
 };
@@ -50,20 +52,37 @@ class Room extends Component {
     render() {
         Moment.locale('nl');
         const { room } = this.state
-        
+
         this.logs = function() {
             return room.logs.map(log => {
-
                 var today = Moment().format('D');
-                if(Moment(log.time).format('D') == today) {
-                    chartData.labels.push(Moment(log.time).format('H'));
-                    chartData.datasets[0].data.push(log.occupation)
+                if(Moment(log.time).format('D') === today) {
+
+                //check if index is already filled with an occupation
+                //if so calculate new average. else add occupation to data array
+                if(chartData.datasets[0].data[Moment(log.time).format('H')] > 0) {
+                    
+                    var tempValueFromDataArray = chartData.datasets[0].data[Moment(log.time).format('H')];
+                    var average = (log.occupation + tempValueFromDataArray) / 2;
+                    
+                    chartData.datasets[0].data[Moment(log.time).format('H')] = _.floor(average);
+                } else {
+                    chartData.datasets[0].data[Moment(log.time).format('H')] = log.occupation
+                }
+
                 }
                 
                 return(
                 <li>Occupation: {log.occupation} Time: {Moment(log.time).format('LLLL')}</li>
                 );
-            });
+            },
+            
+            // chartData.labels = _.remove(chartData.labels, function(l) {
+            //     console.log("ergreg: ", l)
+            //     return l >= 8 && l <= 23;
+            // })
+
+            );
         }
 
         this.chart = function() {
