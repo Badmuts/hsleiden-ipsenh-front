@@ -43,11 +43,13 @@ class Room extends Component {
             "19", "20", "21", "22", "23"],
             datasets: [
                 {
+                    label: 'Occupation',
                     fillColor: "#79D1CF",
                     strokeColor: "#79D1CF",
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                 },
                 {
+                    label: 'Expected Occupation',
                     fillColor: "#7af442",
                     strokeColor: "#7af442",
                     data: [0,0,0,0,0,0,0,4,25,10,10,0,18,0,0,0,0,0,0,0,0,0,10,0]
@@ -56,6 +58,13 @@ class Room extends Component {
         };
 
         var chartOptions = {
+            legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                fontColor: "#000000",
+            }
+            },
             responsive: true,
             maintainAspectRatio: true,
             scales: {
