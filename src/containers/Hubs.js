@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Spinner, NonIdealState, Colors, Tag, Intent, Classes, Tooltip} from '@blueprintjs/core';
+import {Spinner, NonIdealState, Colors, Tag, Intent, Classes} from '@blueprintjs/core';
 
 import Header from './../components/Header';
 import Nav from './../components/Nav';
