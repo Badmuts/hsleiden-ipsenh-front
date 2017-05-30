@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import {Spinner} from '@blueprintjs/core';
+
+import {Spinner, NonIdealState, Colors} from '@blueprintjs/core';
+
 import Header from './../components/Header';
 import Nav from './../components/Nav';
+
 import {hubs} from './../endpoints/hubs.js';
 
 const style = {
@@ -10,13 +13,14 @@ const style = {
 
 class Hubs extends Component {
     state = {
-        hubs: []
+        hubs: [],
+        err: null
     };
 
     componentDidMount() {
         hubs()
             .then(hubs => this.setState({ hubs: hubs }))
-            .catch(err => this.setState({ err }))
+            .catch(err => this.setState({ err: err }))
     }
 
     renderNav() {
@@ -24,8 +28,8 @@ class Hubs extends Component {
     }
     
     render() {
-        const { hubs } = this.state;
-        
+        const { hubs, err } = this.state;
+
         return (
             <div>
                 <Header topNav={this.renderNav()} title="Hubs">
@@ -39,20 +43,21 @@ class Hubs extends Component {
                     </nav>*/}
                 </Header>
 
-                <div style={style} className="row">
-                    {hubs ? (
+                <div style={style} className={"row " + (!hubs.length ? "center-xs" : "")}>
+                    {hubs && !err ? (
                         hubs.map(hub => (
                             <div className="col-xs-6">
                                 <div className="pt-card pt-elevation-0 pt-interactive box" key={hub.id}>
-                                    <h5>{hub.name}</h5>
+                                    <h5> <span className="pt-icon-large pt-icon-pulse" style={{color: (hub.status) === 'online' ? Colors.GREEN2 : (hub.status === 'offline') ? Colors.RED2 : Colors.ORANGE2}}></span> {hub.name}</h5>
                                     <p>{hub.serialNumber}</p>
+                                    <p>Sensors: {hub.sensors.length}</p>
                                 </div>
                             </div>
                         ))
+                    ) : (err) ? (
+                        <NonIdealState title="Could not connect with the server" visual="offline" description="Try again later." />
                     ) : (
-                        <div className="box">
-                            <Spinner />
-                        </div>
+                        <NonIdealState action={<Spinner />} />
                     )}
                 </div>
             </div>
