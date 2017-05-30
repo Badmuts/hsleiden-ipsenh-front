@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 import Header from './../components/Header';
 import Nav from './../components/Nav';
+import {hubs} from './../endpoints/hubs.js';
 
 const style = {
   padding: '30px 50px'
@@ -13,14 +14,9 @@ class Hubs extends Component {
     };
 
     componentDidMount() {
-        fetch('http://localhost:3000/hubs')
-            .then(res => res.json())
-            .then(hubs => {
-                this.setState({ hubs: hubs })
-            })
-            .catch(err => {
-                this.setState({ err })
-            })
+        hubs()
+            .then(hubs => this.setState({ hubs: hubs }))
+            .catch(err => this.setState({ err }))
     }
 
     renderNav() {
@@ -43,16 +39,20 @@ class Hubs extends Component {
                     </nav>*/}
                 </Header>
 
-                <div style={style}>
+                <div style={style} className="row">
                     {hubs ? (
                         hubs.map(hub => (
-                            <div className="pt-card pt-elevation-0 pt-interactive" key={hub.id}>
-                                <h5>{hub.name}</h5>
-                                <p>{hub.serialNumber}</p>
+                            <div className="col-xs-6">
+                                <div className="pt-card pt-elevation-0 pt-interactive box" key={hub.id}>
+                                    <h5>{hub.name}</h5>
+                                    <p>{hub.serialNumber}</p>
+                                </div>
                             </div>
                         ))
                     ) : (
-                        <Spinner />
+                        <div className="box">
+                            <Spinner />
+                        </div>
                     )}
                 </div>
             </div>
