@@ -46,7 +46,7 @@ class Rooms extends Component {
                     <h2>Rooms</h2>
                     {rooms ? (
                         rooms.map(room => (
-                            <Link to={`/rooms/${this.props.match.params.buildingId}/${room.id}`}>
+                            <Link key={room.id} to={`/rooms/${this.props.match.params.buildingId}/${room.id}`}>
                                 <div className="pt-card pt-elevation-0 pt-interactive">
                                     <h5>{room.name}</h5>
                                     <p>Occupation: {room.occupation}</p>

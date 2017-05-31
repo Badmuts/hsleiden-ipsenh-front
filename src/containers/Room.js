@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
+
 class Room extends Component {
     constructor (props) {
         super(props)
@@ -31,6 +32,8 @@ class Room extends Component {
                 this.setState({ room: room })
             })
     }
+
+    
     
 
 
@@ -58,32 +61,8 @@ class Room extends Component {
         };
 
         var chartOptions = {
-            legend: {
-            display: true,
-            position: 'top',
-            labels: {
-                fontColor: "#000000",
-            }
-            },
             responsive: true,
             maintainAspectRatio: true,
-            scales: {
-                yAxes: [{
-                    id: 'y-axis-1',
-                    display: true,
-                    position: 'left',
-                    scaleLabel:{
-                        display: true,
-                        labelString: 'Occupation',
-                    }
-                }],
-                xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Hour'
-                }
-                }],
-            }
         };
 
         this.logs = function() {
@@ -108,7 +87,7 @@ class Room extends Component {
      
 
                 return(
-                <li>Occupation: {log.occupation} Time: {Moment(log.time).format('LLLL')}</li>
+                <li key={log.id}>Occupation: {log.occupation} Time: {Moment(log.time).format('LLLL')}</li>
                 );
             },
 
@@ -126,8 +105,9 @@ class Room extends Component {
             );
         }
 
+
         this.chart = function() {
-            return <BarChart data={chartData} options={chartOptions}/>
+            return <BarChart data={chartData} options={chartOptions}/>            
         }
         return(
             <div className="Container p-30">
@@ -141,6 +121,7 @@ class Room extends Component {
                     />
                     <ul>{this.logs()}</ul>
                     {this.chart()}
+
                 </div>
             
              ) : (
