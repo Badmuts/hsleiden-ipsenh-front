@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
 import Moment from 'moment';
-import { Bar as BarChart } from 'react-chartjs';
+import {Bar} from 'react-chartjs-2'
 import _ from 'lodash'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -25,7 +25,6 @@ class Room extends Component {
     }
     
     componentDidMount() {
-        console.log();
         fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms/${this.props.match.params.roomId}`)
             .then(res => res.json())
             .then(room => {
@@ -47,22 +46,19 @@ class Room extends Component {
             datasets: [
                 {
                     label: 'Occupation',
-                    fillColor: "#79D1CF",
-                    strokeColor: "#79D1CF",
+                    backgroundColor: "#79D1CF",
+                    borderColor: "#79D1CF",
+                    borderWidth: 1,
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                 },
                 {
                     label: 'Expected Occupation',
-                    fillColor: "#7af442",
-                    strokeColor: "#7af442",
+                    backgroundColor: "#7af442",
+                    borderColor: "#7af442",
+                    borderWidth: 1,
                     data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                 }
             ]
-        };
-
-        var chartOptions = {
-            responsive: true,
-            maintainAspectRatio: true,
         };
 
         this.logs = function() {
@@ -84,16 +80,12 @@ class Room extends Component {
 
                 }
 
-     
-
-                return(
-                <li key={log.id}>Occupation: {log.occupation} Time: {Moment(log.time).format('LLLL')}</li>
-                );
+    
             },
 
             room.roster.map(roster => {
                 if(Moment(roster.from).format('D') === this.state.startDate.format('D')) {                    
-                        chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
+                    chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
                 }
             })
             
@@ -107,7 +99,26 @@ class Room extends Component {
 
 
         this.chart = function() {
-            return <BarChart data={chartData} options={chartOptions}/>            
+            return (
+            <div>
+            <Bar
+                data={chartData}
+                options={{
+                    responsive:true,
+                    scaleBeginAtZero:true,
+                    barBeginAtOrigin:true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        yAxes:[{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }}
+            />
+            </div>
+            );
         }
         return(
             <div className="Container p-30">
@@ -115,13 +126,24 @@ class Room extends Component {
                  {room ? (    
                 <div className="pt-card pt-elevation-0 pt-interactive">
                     <h5>{room.name}</h5>
-                    Kies een datum = <DatePicker
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
-                    />
+                    <div className="row">
+                        <div className="col-xs">
+                            <div className="box pt-form-group">
+                                <label className="pt-label" for="example-form-group-input-a">
+                                    Kies een datum
+                                </label>
+                                <div className="input-group">
+                                <span className="input-group-addon" id="basic-addon1"><i className="glyphicon glyphicon-calendar"></i></span>
+                                   <DatePicker className="pt-form-control"
+                                        selected={this.state.startDate}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <ul>{this.logs()}</ul>
                     {this.chart()}
-
                 </div>
             
              ) : (
