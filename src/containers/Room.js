@@ -99,9 +99,9 @@ class Room extends Component {
             return room ? (
                 <Header title={room.name}>
                     <div className="row">
-                        <HeaderWidget label="size" icon="graph" value={room.size}/>
-                        <HeaderWidget label="max capacity" icon="geolocation" value={room.maxCapacity}/>
-                        <HeaderWidget label="occupation" icon="pulse" value={room.occupation}/>
+                        <HeaderWidget label="size" icon="zoom-to-fit" value={room.size}/>
+                        <HeaderWidget label="max capacity" icon="warning-sign" value={room.maxCapacity}/>
+                        <HeaderWidget label="occupation" icon="info-sign" value={room.occupation}/>
                     </div>
                 </Header>
             ) : (
