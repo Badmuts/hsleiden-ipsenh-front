@@ -63,40 +63,35 @@ class Room extends Component {
 
         this.logs = function() {
             return room.logs.map(log => {
-                // var today = Moment().format('D');
                 if(Moment(log.time).format('D') === this.state.startDate.format('D')) {
-
-                //check if index is already filled with an occupation
-                //if so calculate new average. else add occupation to data array
-                if(chartData.datasets[0].data[Moment(log.time).format('H')] > 0) {
-                    
-                    var tempValueFromDataArray = chartData.datasets[0].data[Moment(log.time).format('H')];
-                    var average = (log.occupation + tempValueFromDataArray) / 2;
-                    
-                    chartData.datasets[0].data[Moment(log.time).format('H')] = _.floor(average);
-                } else {
-                    chartData.datasets[0].data[Moment(log.time).format('H')] = log.occupation
-                }
+                    //check if index is already filled with an occupation
+                    //if so calculate new average. else add occupation to data array
+                    if(chartData.datasets[0].data[Moment(log.time).format('H')] > 0) {
+                        var tempValueFromDataArray = chartData.datasets[0].data[Moment(log.time).format('H')];
+                        var average = (log.occupation + tempValueFromDataArray) / 2;
+                        chartData.datasets[0].data[Moment(log.time).format('H')] = _.floor(average);
+                    } else {
+                        chartData.datasets[0].data[Moment(log.time).format('H')] = log.occupation
+                    }
 
                 }
-
-    
             },
 
             room.roster.map(roster => {
                 if(Moment(roster.from).format('D') === this.state.startDate.format('D')) {                    
                     chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
                 }
-            })
+            }),
             
-            // chartData.labels = _.remove(chartData.labels, function(l) {
-            //     console.log("ergreg: ", l)
-            //     return l >= 8 && l <= 23;
-            // })
+            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23),
+            console.log("chartData[0].data length: ", chartData.datasets[0].data.length),
+            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23),
+            console.log("chartData[1].data length: ", chartData.datasets[1].data.length),
+            chartData.labels = chartData.labels.splice(7,23),
+            console.log("label length: ", chartData.labels.length),
 
             );
-        }
-
+        };
 
         this.chart = function() {
             return (
