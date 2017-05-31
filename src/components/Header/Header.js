@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import img from './hsleiden.jpg';
 import './Header.css';
+import Nav from './../Nav';
 
 class Header extends Component {
     render() {
@@ -40,11 +41,9 @@ class Header extends Component {
 
         return (
             <div>
-                {this.props.topNav  && (
-                    <div className="header-nav">
-                        {this.props.topNav}
-                    </div>
-                )}
+                <div className="header-nav">
+                    {this.props.topNav ? (this.props.topNav) : (<Nav />)}
+                </div>
                 <div style={wrapper}>
                     <div style={colorFilter}></div>
                     <div style={image}></div>

@@ -13,6 +13,7 @@ import Buildings from './containers/Buildings'
 import Rooms from './containers/Rooms'
 import Room from './containers/Room'
 import Hubs from './containers/Hubs'
+import HubsDetails from './containers/HubsDetails'
 
 
 import pkg from './../package.json';
@@ -24,14 +25,14 @@ class App extends Component{
       <Router>
         <div>
           <div className="App">
-            {/*<Nav />*/}
 
-
+          {/*<Nav />*/}
           <Route path="/" component={Home} exact/>
           <Route path="/buildings" component={Buildings}/>
           <Route path="/rooms/:buildingId" component={Rooms}/>
           <Route path="/rooms/:buildingId/:roomId" component={Room}/>
           <Route path="/hubs" component={Hubs}/>
+          <Route name="hub-detail" path="/hubs/:id" component={HubsDetails}/>
 
           </div>
           <Footer version={pkg.version}/>
