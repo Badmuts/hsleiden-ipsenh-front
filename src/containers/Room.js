@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Spinner} from '@blueprintjs/core';
+import Header from './../components/Header';
+import HeaderWidget from './../components/HeaderWidget';
 import Moment from 'moment';
 import {Bar} from 'react-chartjs-2'
 import _ from 'lodash'
@@ -9,12 +11,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 class Room extends Component {
+    state = {
+        room: null,
+        startDate: Moment()
+    };
+    
     constructor (props) {
         super(props)
-        this.state = {
-            room: null,
-            startDate: Moment()
-        };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -28,7 +31,8 @@ class Room extends Component {
         fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms/${this.props.match.params.roomId}`)
             .then(res => res.json())
             .then(room => {
-                this.setState({ room: room })
+                console.log(room),
+                this.setState({ room: room})
             })
     }
 
@@ -38,7 +42,7 @@ class Room extends Component {
 
     render() {
         Moment.locale('nl');
-        const { room } = this.state
+        const {room} = this.state
 
         var chartData = {
             labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
@@ -83,44 +87,57 @@ class Room extends Component {
                 }
             }),
             
-            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23),
-            console.log("chartData[0].data length: ", chartData.datasets[0].data.length),
-            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23),
-            console.log("chartData[1].data length: ", chartData.datasets[1].data.length),
             chartData.labels = chartData.labels.splice(7,23),
-            console.log("label length: ", chartData.labels.length),
+            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23),
+            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23),
+
 
             );
         };
 
+        this.header = function() {
+            return room ? (
+                <Header title={room.name}>
+                    <div className="row">
+                        <HeaderWidget label="size" icon="graph" value={room.size}/>
+                        <HeaderWidget label="max capacity" icon="geolocation" value={room.maxCapacity}/>
+                        <HeaderWidget label="occupation" icon="pulse" value={room.occupation}/>
+                    </div>
+                </Header>
+            ) : (
+                    <div></div>
+                )
+        };
+
         this.chart = function() {
             return (
-            <div>
-            <Bar
-                data={chartData}
-                options={{
-                    responsive:true,
-                    scaleBeginAtZero:true,
-                    barBeginAtOrigin:true,
-                    maintainAspectRatio: true,
-                    scales: {
-                        yAxes:[{
-                            ticks: {
-                                beginAtZero: true
+                <div>
+                    <Bar
+                        data={chartData}
+                        options={{
+                            responsive:true,
+                            scaleBeginAtZero:true,
+                            barBeginAtOrigin:true,
+                            maintainAspectRatio: true,
+                            scales: {
+                                yAxes:[{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
                             }
-                        }]
-                    }
-                }}
-            />
-            </div>
-            );
-        }
+                        }}
+                    />
+                </div>
+                );
+            };
         return(
-            <div className="Container p-30">
-                <h2>Room</h2> 
+            <div>
+            {this.header()}
+            
+            <div className="Container p-30"> 
                  {room ? (    
                 <div className="pt-card pt-elevation-0 pt-interactive">
-                    <h5>{room.name}</h5>
                     <div className="row">
                         <div className="col-xs">
                             <div className="box pt-form-group">
@@ -145,7 +162,8 @@ class Room extends Component {
                     <Spinner />
                 )}
             </div>
-            
+            </div>
+
         )
     }
 }

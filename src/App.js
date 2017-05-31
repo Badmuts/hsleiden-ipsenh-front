@@ -29,9 +29,9 @@ class App extends Component{
           {/*<Nav />*/}
           <Route path="/" component={Home} exact/>
           <Route path="/buildings" component={Buildings}/>
-          <Route path="/rooms/:buildingId" component={Rooms}/>
-          <Route path="/rooms/:buildingId/:roomId" component={Room}/>
-          <Route path="/hubs" component={Hubs}/>
+          <Route exact name="rooms" path="/rooms/:buildingId" component={Rooms}/>
+          <Route name="room-detail" path="/rooms/:buildingId/:roomId" component={Room}/>
+          <Route exact name="hubs" path="/hubs" component={Hubs}/>
           <Route name="hub-detail" path="/hubs/:id" component={HubsDetails}/>
 
           </div>
