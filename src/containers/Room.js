@@ -52,7 +52,7 @@ class Room extends Component {
                     label: 'Expected Occupation',
                     fillColor: "#7af442",
                     strokeColor: "#7af442",
-                    data: [0,0,0,0,0,0,0,4,25,10,10,0,18,0,0,0,0,0,0,0,0,0,10,0]
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                 }
             ]
         };
@@ -104,11 +104,19 @@ class Room extends Component {
                 }
 
                 }
-                
+
+     
+
                 return(
                 <li>Occupation: {log.occupation} Time: {Moment(log.time).format('LLLL')}</li>
                 );
             },
+
+            room.roster.map(roster => {
+                if(Moment(roster.from).format('D') === this.state.startDate.format('D')) {                    
+                        chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
+                }
+            })
             
             // chartData.labels = _.remove(chartData.labels, function(l) {
             //     console.log("ergreg: ", l)
