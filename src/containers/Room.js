@@ -65,8 +65,11 @@ class Room extends Component {
         };
 
         this.logs = function() {
-            return room.logs.map(log => {
-                if(Moment(log.time).format('D') === this.state.startDate.format('D')) {
+            var startDate = this.state.startDate;
+
+            _.forEach(room.logs, function(log) {
+
+                if(Moment(log.time).format('D') === startDate.format('D')) {
                     //check if index is already filled with an occupation
                     //if so calculate new average. else add occupation to data array
                     if(chartData.datasets[0].data[Moment(log.time).format('H')] > 0) {
@@ -78,23 +81,20 @@ class Room extends Component {
                     }
 
                 }
-                return "";
-            },
 
-            room.roster.map(roster => {
-                if(Moment(roster.from).format('D') === this.state.startDate.format('D')) {                    
-                    chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
+            }, startDate);
+
+            _.forEach(room.roster, function(value) {
+                if(Moment(value.from).format('D') === startDate.format('D')) {                    
+                    chartData.datasets[1].data[Moment(value.from).format('H')] = value.amount
                 }
 
-                return "";
-            }),
-            
+            }, startDate);
+
+
             chartData.labels = chartData.labels.splice(7,23),
             chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23),
-            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23),
-
-
-            );
+            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23)
             
         };
 
