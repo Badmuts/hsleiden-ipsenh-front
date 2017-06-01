@@ -48,7 +48,7 @@ class Buildings extends Component {
                     <h2>Buildings</h2>
                     {buildings ? (
                         buildings.map(building => (
-                            <Link to={`/rooms/${building.id}`}>
+                            <Link key={building.id} to={`/rooms/${building.id}`}>
                                 <div className="pt-card pt-elevation-0 pt-interactive">
                                     <h5>{building.name}</h5>
                                     <p>{building.location}</p>

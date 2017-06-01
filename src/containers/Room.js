@@ -92,10 +92,11 @@ class Room extends Component {
             }, startDate);
 
 
-            chartData.labels = chartData.labels.splice(7,23),
-            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23),
+            chartData.labels = chartData.labels.splice(7,23)
+            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23)
             chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23)
-            
+
+           
         };
 
         this.header = function() {
