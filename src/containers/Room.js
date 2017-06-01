@@ -31,7 +31,6 @@ class Room extends Component {
         fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms/${this.props.match.params.roomId}`)
             .then(res => res.json())
             .then(room => {
-                console.log(room),
                 this.setState({ room: room})
             })
     }
@@ -79,12 +78,15 @@ class Room extends Component {
                     }
 
                 }
+                return "";
             },
 
             room.roster.map(roster => {
                 if(Moment(roster.from).format('D') === this.state.startDate.format('D')) {                    
                     chartData.datasets[1].data[Moment(roster.from).format('H')] = roster.amount
                 }
+
+                return "";
             }),
             
             chartData.labels = chartData.labels.splice(7,23),
@@ -93,6 +95,7 @@ class Room extends Component {
 
 
             );
+            
         };
 
         this.header = function() {
@@ -141,7 +144,7 @@ class Room extends Component {
                     <div className="row">
                         <div className="col-xs">
                             <div className="box pt-form-group">
-                                <label className="pt-label" for="example-form-group-input-a">
+                                <label className="pt-label" htmlFor="example-form-group-input-a">
                                     Kies een datum
                                 </label>
                                 <div className="input-group">
