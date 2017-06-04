@@ -9,8 +9,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { room } from './../endpoints/buildings';
 
-
-
 class Room extends Component {
     state = {
         room: null,
@@ -30,20 +28,10 @@ class Room extends Component {
     }
     
     componentDidMount() {
-        // fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms/${this.props.match.params.roomId}`)
-        //     .then(res => res.json())
-        //     .then(room => {
-        //         this.setState({ room: room})
-        //     })
-
         room(this.props.match.params.buildingId, this.props.match.params.roomId)
             .then(room => this.setState({ room: room }))
             .catch(err => this.setState({ err: err }))
     }
-
-    
-    
-
 
     render() {
         Moment.locale('nl');
