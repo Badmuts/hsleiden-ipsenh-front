@@ -3,21 +3,22 @@ import {Spinner} from '@blueprintjs/core';
 import {Link} from 'react-router-dom';
 import Header from './../components/Header';
 import Nav from './../components/Nav';
+import { rooms } from './../endpoints/buildings';
 
 const style = {
   padding: '30px 50px'
 };
 
 class Rooms extends Component {
-    state = {rooms: null}
+    state = {
+        rooms: [],
+        err: null
+}
 
     componentDidMount() {
-        console.log();
-        fetch(`http://localhost:3000/buildings/${this.props.match.params.buildingId}/rooms`)
-            .then(res => res.json())
-            .then(rooms => {
-                this.setState({ rooms })
-            })
+        rooms(this.props.match.params.buildingId)
+            .then(rooms => this.setState({ rooms: rooms }))
+            .catch(err => this.setState({ err: err }))
     }
     
 

@@ -5,5 +5,9 @@ export function buildings() {
 };
 
 export function rooms(building) {
-    return fetch(`${ENDPOINT}/buildings/${building.id}/rooms`).then(res => res.json());
+    return fetch(`${ENDPOINT}/buildings/${building.id || building }/rooms`).then(res => res.json());
+}
+
+export function room(building, room) {
+    return fetch(`${ENDPOINT}/buildings/${building}/rooms/${room}`).then(res => res.json());
 }
