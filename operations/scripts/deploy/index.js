@@ -128,6 +128,10 @@ createDeployment()
                             "author_link": deployment.creator.html_url,
                             "author_icon": deployment.creator.avatar_url,
                             "fields": [{
+                                "title": "Project",
+                                "value": `:earth_africa: <https://github.com/${repoSlug}| Front>`,
+                                "short": false
+                            }, {
                                 "title": "Image :cd:",
                                 "value": `<https://hub.docker.com/r/badmuts/hsleiden-ipsenh-front/tags/|${current}>`,
                                 "short": true
@@ -189,6 +193,10 @@ createDeployment()
                         "author_link": deployment.creator.html_url,
                         "author_icon": deployment.creator.avatar_url,
                         "fields": [{
+                            "title": "Project",
+                            "value": `:earth_africa: <https://github.com/${repoSlug}|Front>`,
+                            "short": false
+                        }, {
                             "title": "Image :cd:",
                             "value": `<https://hub.docker.com/r/badmuts/hsleiden-ipsenh-front/tags/|${current}>`,
                             "short": true
