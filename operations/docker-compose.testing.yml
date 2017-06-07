@@ -6,7 +6,7 @@ services:
     ports:
       - 80
     labels:
-      - "traefik.backend=front-testing-${CURRENT}"
+      - "traefik.backend=front-testing-${TRAVIS_BRANCH}"
       - "traefik.frontend.rule=Host:${TRAVIS_BRANCH}.front.ipsenh.daan.codes"
       - "traefik.enable=true"
       - "traefik.port=80"
