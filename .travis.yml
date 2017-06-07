@@ -27,7 +27,7 @@ script:
 # Configure deployment env
 before_deploy:
  - nvm install node
- - cd operations/scripts/deploy; yarn install; cd ../../
+ - cd operations/scripts/deploy; yarn install; cd ../../../
 
 # Run deploy script
 deploy:
