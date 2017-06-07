@@ -34,7 +34,7 @@ if (!current) {
 var repoOwner = 'badmuts';
 var repoSlug = `${repoOwner}/hsleiden-ipsenh-front`;
 var githubEndpoint = 'https://api.github.com';
-var token = process.env.IPSENH_GITHUB_TOKEN;
+var token = yargs.githubToken || process.env.IPSENH_GITHUB_TOKEN;
 var github = axios.create({
     baseURL: githubEndpoint,
     headers: {
