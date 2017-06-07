@@ -20,8 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy-testing": "node operations/scripts/deploy --compose-file operations/docker-compose.testing.yml",
-    "deploy-staging": "node operations/scripts/deploy --compose-file operations/docker-compose.staging.yml",
-    "deploy-production": "node operations/scripts/deploy --compose-file operations/docker-compose.production.yml"
+    "deploy-testing": "node operations/scripts/deploy --compose-file operations/docker-compose.testing.yml --env testing",
+    "deploy-staging": "node operations/scripts/deploy --compose-file operations/docker-compose.staging.yml --env staging",
+    "deploy-production": "node operations/scripts/deploy --compose-file operations/docker-compose.production.yml --env production"
   }
 }
