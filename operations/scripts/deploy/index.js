@@ -20,7 +20,7 @@ var travisBranch = yargs.branch;
 var current = yargs.tag;
 var env = yargs.env;
 
-var compose = yargs.composeFile || 'docker-compose.' + env + '.yml';
+var compose = yargs.composeFile || 'docker-compose.yml';
 
 // Check if compose file exists
 if (!fs.existsSync(compose)) {
@@ -28,7 +28,7 @@ if (!fs.existsSync(compose)) {
 }
 
 if (!current) {
-    current = travisBranch + '-' + process.env.TRAVIS_COMMIT.substring(0, 6);
+    current = travisBranch + '-' + process.env.TRAVIS_COMMIT.substring(0, 7);
 }
 
 var repoOwner = 'badmuts';
@@ -149,7 +149,7 @@ createDeployment()
                                 "short": true
                             }, {
                                 "title": "Commit",
-                                "value": `<https://github.com/${repoSlug}/commit/${process.env.TRAVIS_COMMIT}|${process.env.TRAVIS_COMMIT.substring(0, 6)}>`,
+                                "value": `<https://github.com/${repoSlug}/commit/${process.env.TRAVIS_COMMIT}|${process.env.TRAVIS_COMMIT.substring(0, 7)}>`,
                                 "short": true
                             }]
                         }
@@ -210,7 +210,7 @@ createDeployment()
                             "short": true
                         }, {
                             "title": "Commit",
-                            "value": `<https://github.com/${repoSlug}/commit/${process.env.TRAVIS_COMMIT}|${process.env.TRAVIS_COMMIT.substring(0, 6)}>`,
+                            "value": `<https://github.com/${repoSlug}/commit/${process.env.TRAVIS_COMMIT}|${process.env.TRAVIS_COMMIT.substring(0, 7)}>`,
                             "short": true
                         }],
                         "actions": [{
