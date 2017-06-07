@@ -13,3 +13,7 @@ build:
 
 push:
 	docker push $(REPO)/$(IMAGE):$(CURRENT)
+	if ![[ -z $$TRAVIS_TAG]]; then \
+		docker tag $(REPO)/$(IMAGE):$(CURRENT) $(REPO)/$(IMAGE):$$TRAVIS_TAG; \
+		docker push $(REPO)/$(IMAGE):$$TRAVIS_TAG; \
+	fi
