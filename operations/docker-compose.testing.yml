@@ -1,0 +1,18 @@
+version: "2.1"
+
+services: 
+  front:
+    image: badmuts/hsleiden-ipsenh-front:${CURRENT}
+    ports:
+      - 80
+    labels:
+      - "traefik.backend=front-testing-${CURRENT}"
+      - "traefik.frontend.rule=Host:${TRAVIS_BRANCH}.front.ipsenh.daan.codes"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: front
