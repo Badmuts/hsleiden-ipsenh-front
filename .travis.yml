@@ -24,10 +24,28 @@ script:
   - make build
   - make push
 
-# Currently disable this so every commit is pushed to the hub
-# deploy:
-#   provider: script
-#   script: operations/scripts/push.sh
+# Configure deployment env
+before_deploy:
+ - nvm install node
+ - cd operations/scripts/deploy; yarn install; cd ../../
+
+# Run deploy script
+deploy:
+  - provider: script
+    script: yarn run deploy-testing -- --branch $TRAVIS_BRANCH
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: script
+    script: yarn run deploy-staging -- --branch $TRAVIS_BRANCH
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: yarn run deploy-production -- --tag $TRAVIS_TAG
+    skip_cleanup: true
+    on:
+      tags: true
 
 notifications:
   slack:
