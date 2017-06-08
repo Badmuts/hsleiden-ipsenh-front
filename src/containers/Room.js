@@ -2,18 +2,40 @@ import React, {Component} from 'react';
 import {Spinner, Colors} from '@blueprintjs/core';
 import Header from './../components/Header';
 import HeaderWidget from './../components/HeaderWidget';
+import BarChart from './../components/BarChart';
 import Moment from 'moment';
-import {Bar} from 'react-chartjs-2'
 import _ from 'lodash'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { room } from './../endpoints/buildings';
 
+const cleanChart = {
+    labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+    "19", "20", "21", "22", "23"],
+    datasets: [
+        {
+            label: 'Occupation',
+            backgroundColor: "#79D1CF",
+            borderColor: "#79D1CF",
+            borderWidth: 1,
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        },
+        {
+            label: 'Expected Occupation',
+            backgroundColor: "#7af442",
+            borderColor: "#7af442",
+            borderWidth: 1,
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        }
+    ]
+};
+
 class Room extends Component {
     state = {
         room: null,
         err: null,
-        startDate: Moment()
+        startDate: Moment(),
+        chartData: _.clone(cleanChart)
     };
     
     constructor (props) {
@@ -23,78 +45,60 @@ class Room extends Component {
 
     handleChange(date) {
         this.setState({
-            startDate: date
+            startDate: date,
+            chartData: this.processLogs(date)
         });
     }
     
     componentDidMount() {
         room(this.props.match.params.buildingId, this.props.match.params.roomId)
             .then(room => this.setState({ room: room }))
+            .then(room => this.setState({ chartData: this.processLogs(this.state.startDate) }))
             .catch(err => this.setState({ err: err }))
+    }
+
+    processLogs(startDate) {
+        const room = this.state.room
+        var data = _.clone(cleanChart);
+        
+        _.forEach(room.logs, function(log) {
+            if(Moment(log.time).format('D') === startDate.format('D')) {
+                //check if index is already filled with an occupation
+                //if so calculate new average. else add occupation to data array
+                if(data.datasets[0].data[Moment(log.time).format('H')] > 0) {
+                    var tempValueFromDataArray = data.datasets[0].data[Moment(log.time).format('H')];
+                    var average = (log.occupation + tempValueFromDataArray) / 2;
+                    data.datasets[0].data[Moment(log.time).format('H')] = _.floor(average);
+                } else {
+                    data.datasets[0].data[Moment(log.time).format('H')] = log.occupation
+                }
+
+            }
+
+        });
+
+        _.forEach(room.roster, function(value) {
+            if(Moment(value.from).format('D') === startDate.format('D')) {                    
+                data.datasets[1].data[Moment(value.from).format('H')] = value.amount
+            }
+
+        });
+
+        data.labels = _.map(data.labels, (label) => `${label}:00`);
+
+        data.labels = data.labels.splice(7,23);
+        data.datasets[0].data = data.datasets[0].data.splice(7,23);
+        data.datasets[1].data = data.datasets[1].data.splice(7,23);
+
+        return data;
     }
 
     render() {
         Moment.locale('nl');
-        const {room} = this.state
+        const {room, chartData} = this.state
 
-        var chartData = {
-            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-            "19", "20", "21", "22", "23"],
-            datasets: [
-                {
-                    label: 'Occupation',
-                    backgroundColor: "#79D1CF",
-                    borderColor: "#79D1CF",
-                    borderWidth: 1,
-                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                },
-                {
-                    label: 'Expected Occupation',
-                    backgroundColor: "#7af442",
-                    borderColor: "#7af442",
-                    borderWidth: 1,
-                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                }
-            ]
-        };
-
-        this.logs = function() {
-            var startDate = this.state.startDate;
-
-            _.forEach(room.logs, function(log) {
-
-                if(Moment(log.time).format('D') === startDate.format('D')) {
-                    //check if index is already filled with an occupation
-                    //if so calculate new average. else add occupation to data array
-                    if(chartData.datasets[0].data[Moment(log.time).format('H')] > 0) {
-                        var tempValueFromDataArray = chartData.datasets[0].data[Moment(log.time).format('H')];
-                        var average = (log.occupation + tempValueFromDataArray) / 2;
-                        chartData.datasets[0].data[Moment(log.time).format('H')] = _.floor(average);
-                    } else {
-                        chartData.datasets[0].data[Moment(log.time).format('H')] = log.occupation
-                    }
-
-                }
-
-            }, startDate);
-
-            _.forEach(room.roster, function(value) {
-                if(Moment(value.from).format('D') === startDate.format('D')) {                    
-                    chartData.datasets[1].data[Moment(value.from).format('H')] = value.amount
-                }
-
-            }, startDate);
-
-
-            chartData.labels = chartData.labels.splice(7,23)
-            chartData.datasets[0].data = chartData.datasets[0].data.splice(7,23)
-            chartData.datasets[1].data = chartData.datasets[1].data.splice(7,23)
-
-           
-        };
-
-        this.header = function() {
-            return room ? (
+        return(<div>
+                {room ? (
                 <Header title={room.name}>
                     <div className="row">
                         <HeaderWidget label="size" icon="zoom-to-fit" value={room.size}/>
@@ -102,35 +106,7 @@ class Room extends Component {
                         <HeaderWidget label="occupation" icon="info-sign" value={room.occupation}/>
                     </div>
                 </Header>
-            ) : (
-                    <div></div>
-                )
-        };
-
-        this.chart = function() {
-            return (
-                <div>
-                    <Bar
-                        data={chartData}
-                        options={{
-                            responsive:true,
-                            scaleBeginAtZero:true,
-                            barBeginAtOrigin:true,
-                            maintainAspectRatio: true,
-                            scales: {
-                                yAxes:[{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }}
-                    />
-                </div>
-                );
-            };
-        return(<div>
-                {this.header()}
+                ) : (<div></div>)}
                 
                 <div style={{padding: '30px 50px', marginTop: '-70px', zIndex: 10, position: 'relative' }}> 
                     {room ? (
@@ -152,8 +128,7 @@ class Room extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <ul>{this.logs()}</ul>
-                            {this.chart()}
+                            <BarChart data={chartData} />
                         </div>
                     
                     ) : (
