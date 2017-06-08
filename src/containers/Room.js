@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Spinner} from '@blueprintjs/core';
+import {Spinner, Colors} from '@blueprintjs/core';
 import Header from './../components/Header';
 import HeaderWidget from './../components/HeaderWidget';
 import Moment from 'moment';
@@ -129,40 +129,38 @@ class Room extends Component {
                 </div>
                 );
             };
-        return(
-            <div>
-            {this.header()}
-            
-            <div className="Container p-30"> 
-                 {room ? (    
-                <div className="pt-card pt-elevation-0 pt-interactive">
-                    <div className="row">
-                        <div className="col-xs">
-                            <div className="box pt-form-group">
-                                <label className="pt-label" htmlFor="example-form-group-input-a">
-                                    Kies een datum
-                                </label>
-                                <div className="input-group">
-                                <span className="input-group-addon" id="basic-addon1"><i className="glyphicon glyphicon-calendar"></i></span>
-                                   <DatePicker className="pt-form-control"
-                                        selected={this.state.startDate}
-                                        onChange={this.handleChange}
-                                    />
+        return(<div>
+                {this.header()}
+                
+                <div style={{padding: '30px 50px', marginTop: '-70px', zIndex: 10, position: 'relative' }}> 
+                    {room ? (
+                        <div className="pt-card pt-elevation-0 pt-interactive">
+                            <div className="row">
+                                <div className="col-xs">
+                                    <h2><span className="pt-icon-large pt-icon-timeline-bar-chart" style={{color: Colors.GRAY4}}></span>  Occupation vs. Expected occupation</h2>
+                                    <div className="box pt-form-group">
+                                        <label className="pt-label" htmlFor="example-form-group-input-a">
+                                            Kies een datum
+                                        </label>
+                                        <div className="input-group">
+                                        <span className="input-group-addon" id="basic-addon1"><i className="glyphicon glyphicon-calendar"></i></span>
+                                        <DatePicker className="pt-form-control"
+                                                selected={this.state.startDate}
+                                                onChange={this.handleChange}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <ul>{this.logs()}</ul>
+                            {this.chart()}
                         </div>
-                    </div>
-                    <ul>{this.logs()}</ul>
-                    {this.chart()}
-                </div>
-            
-             ) : (
-                    <Spinner />
-                )}
+                    
+                    ) : (
+                        <Spinner />
+                    )}
             </div>
-            </div>
-
-        )
+        </div>)
     }
 }
 
