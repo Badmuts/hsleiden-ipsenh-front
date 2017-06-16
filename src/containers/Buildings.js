@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Spinner } from "@blueprintjs/core";
 import Header from "./../components/Header";
 import Nav from "./../components/Nav";
+import { Link } from "react-router-dom";
 
 const style = {
   padding: "30px 50px"
@@ -52,14 +53,18 @@ class Buildings extends Component {
 
         <div style={style}>
           <h2>Buildings</h2>
-          {buildings
-            ? buildings.map(building =>
-                <div className="pt-card pt-elevation-0 pt-interactive">
-                  <h5>{building.name}</h5>
-                  <p>{building.location}</p>
-                </div>
-              )
-            : <Spinner />}
+          {buildings ? (
+              buildings.map(building => (
+                  <Link key={building.id} to={`/rooms/${building.id}`}>
+                      <div className="pt-card pt-elevation-0 pt-interactive">
+                          <h5>{building.name}</h5>
+                          <p>{building.location}</p>
+                      </div>
+                  </Link>
+              ))
+          ) : (
+              <Spinner />
+          )}
         </div>
       </div>
     );
