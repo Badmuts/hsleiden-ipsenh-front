@@ -1,6 +1,6 @@
 {
   "name": "hsleiden-ipsenh-front",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^1.16.0",
