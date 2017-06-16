@@ -7,4 +7,4 @@ import Nav from './Nav';
 //   ReactDOM.render(<Nav />, div);
 // });
 
-it('works', () => {})
+it('works', () => { })

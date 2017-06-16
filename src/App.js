@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 import {
@@ -15,18 +15,18 @@ import HubsDetails from './containers/HubsDetails'
 
 import pkg from './../package.json';
 
-class App extends Component{
+class App extends Component {
   render() {
     return (
       <Router>
         <div>
           <div className="App">
-            <Route exact path="/" component={Home}/>
-            <Route path="/buildings" component={Buildings}/>
-            <Route exact name="hubs" path="/hubs" component={Hubs}/>
-            <Route name="hub-detail" path="/hubs/:id" component={HubsDetails}/>
+            <Route exact path="/" component={Home} />
+            <Route path="/buildings" component={Buildings} />
+            <Route exact name="hubs" path="/hubs" component={Hubs} />
+            <Route name="hub-detail" path="/hubs/:id" component={HubsDetails} />
           </div>
-          <Footer version={pkg.version}/>
+          <Footer version={pkg.version} />
         </div>
       </Router>
     )
