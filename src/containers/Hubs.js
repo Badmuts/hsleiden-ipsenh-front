@@ -20,10 +20,13 @@ const style = {
 };
 
 class Hubs extends Component {
-  state = {
-    hubs: [],
-    err: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hubs: [],
+      err: null
+    };
+  }
 
   componentDidMount() {
     hubs()

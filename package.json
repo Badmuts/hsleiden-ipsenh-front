@@ -13,6 +13,7 @@
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
+    "eslint": "^4.0.0",
     "prettier": "^1.4.4",
     "react-scripts": "0.9.5"
   },
@@ -25,6 +26,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.js\"",
+    "lint": "eslint .",
     "deploy-testing": "node operations/scripts/deploy --compose-file operations/docker-compose.testing.yml --env testing",
     "deploy-staging": "node operations/scripts/deploy --compose-file operations/docker-compose.staging.yml --env staging",
     "deploy-production": "node operations/scripts/deploy --compose-file operations/docker-compose.production.yml --env production"

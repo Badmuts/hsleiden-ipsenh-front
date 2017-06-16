@@ -8,9 +8,12 @@ const style = {
 };
 
 class Buildings extends Component {
-  state = {
-    buildings: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      buildings: []
+    };
+  }
 
   componentDidMount() {
     fetch("http://localhost:3000/buildings")

@@ -20,9 +20,12 @@ const menu = (
 );
 
 class Nav extends Component {
-  state = {
-    name: "Stuxnet."
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "Stuxnet."
+    };
+  }
 
   render() {
     return (

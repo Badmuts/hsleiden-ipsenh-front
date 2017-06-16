@@ -7,14 +7,13 @@ import { save } from "./../endpoints/hubs";
 import _ from "lodash";
 
 class HubsDetails extends Component {
-  state = {
-    hub: {},
-    buildings: [],
-    selectedBuilding: false
-  };
-
   constructor(props) {
-    super();
+    super(props);
+    this.state = {
+      hub: {},
+      buildings: [],
+      selectedBuilding: false
+    };
     this.state = props.location.state;
     this.handleSelectBuilding = this.handleSelectBuilding.bind(this);
     this.setRoom = this.setRoom.bind(this);
