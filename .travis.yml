@@ -20,7 +20,7 @@ before_script:
 
 script:
   - yarn lint
-  - yarn test
+  - yarn test -- --coverage
   - yarn run build
   - make build
   - make push

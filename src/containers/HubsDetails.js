@@ -14,14 +14,17 @@ class HubsDetails extends Component {
       buildings: [],
       selectedBuilding: false
     };
-    this.state = props.location.state;
     this.handleSelectBuilding = this.handleSelectBuilding.bind(this);
     this.setRoom = this.setRoom.bind(this);
     this.saveHub = this.saveHub.bind(this);
   }
 
+  componentWillReceiveProps(props) {
+    this.state = props.location.state;
+  }
+
   componentDidMount() {
-    if (!this.state.hub.room.id) {
+    if (this.state.hub.room && !this.state.hub.room.id) {
       buildings()
         .then(buildings =>
           this.setState({ buildings: buildings, hub: this.state.hub })
@@ -71,12 +74,12 @@ class HubsDetails extends Component {
             <HeaderWidget
               label="sensors"
               icon="graph"
-              value={hub.sensors.length}
+              value={hub.sensors && hub.sensors.length}
             />
             <HeaderWidget
               label="location"
               icon="geolocation"
-              value={hub.room.name}
+              value={hub.room && hub.room.name}
             />
           </div>
         </Header>
@@ -92,19 +95,20 @@ class HubsDetails extends Component {
                 </tr>
               </thead>
               <tbody>
-                {hub.sensors.map(sensor =>
-                  <tr key={sensor.id}>
-                    <td>{sensor.name}</td>
-                    <td>{sensor.sensorType}</td>
-                    <td><code>{sensor.status.toString()}</code></td>
-                  </tr>
-                )}
+                {hub.sensors &&
+                  hub.sensors.map(sensor =>
+                    <tr key={sensor.id}>
+                      <td>{sensor.name}</td>
+                      <td>{sensor.sensorType}</td>
+                      <td><code>{sensor.status.toString()}</code></td>
+                    </tr>
+                  )}
               </tbody>
             </table>
 
             <hr />
             <h2>Room</h2>
-            {hub.room.name
+            {hub.room && hub.room.name
               ? <div
                   className="pt-card pt-elevation-0 pt-interactive box"
                   style={{ marginBottom: "15px" }}

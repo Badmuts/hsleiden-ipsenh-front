@@ -1,20 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Nav from "./Nav";
+import HubsDetails from "./HubsDetails";
 import { MemoryRouter } from "react-router-dom";
-import { shallow } from "enzyme";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <MemoryRouter>
-      <Nav />
+      <HubsDetails />
     </MemoryRouter>,
     div
   );
-});
-
-it("shows 3 links", () => {
-  const nav = shallow(<Nav />);
-  expect(nav.find("Link")).toHaveLength(3);
 });

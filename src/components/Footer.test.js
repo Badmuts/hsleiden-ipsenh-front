@@ -1,20 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Nav from "./Nav";
-import { MemoryRouter } from "react-router-dom";
+import Footer from "./Footer";
 import { shallow } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <MemoryRouter>
-      <Nav />
+      <Footer />
     </MemoryRouter>,
     div
   );
 });
 
-it("shows 3 links", () => {
-  const nav = shallow(<Nav />);
-  expect(nav.find("Link")).toHaveLength(3);
+it("prints the version when provided", () => {
+  const footer = shallow(<Footer version="1.0.0" />);
+  expect(footer.text()).toBe("IPSENH - Groep 2 - v1.0.0");
 });
