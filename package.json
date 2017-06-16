@@ -17,13 +17,22 @@
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "enzyme": "^2.8.2",
+    "eslint": "^4.0.0",
+    "prettier": "^1.4.4",
+    "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.6.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "scripts": {
     "start": "PORT=9000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "eslint src/**/*.js",
     "deploy-testing": "node operations/scripts/deploy --compose-file operations/docker-compose.testing.yml --env testing",
     "deploy-staging": "node operations/scripts/deploy --compose-file operations/docker-compose.staging.yml --env staging",
     "deploy-production": "node operations/scripts/deploy --compose-file operations/docker-compose.production.yml --env production"

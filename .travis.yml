@@ -19,7 +19,8 @@ before_script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 script:
-  - yarn test
+  - yarn lint
+  - yarn test -- --coverage
   - yarn run build
   - make build
   - make push
