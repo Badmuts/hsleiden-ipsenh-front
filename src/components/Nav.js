@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Button,
   Menu,
@@ -7,7 +7,7 @@ import {
   MenuDivider,
   Popover,
   Position
-} from "@blueprintjs/core";
+} from '@blueprintjs/core';
 
 const menu = (
   <Menu>
@@ -21,8 +21,8 @@ const menu = (
 
 class Nav extends Component {
   state = {
-    name: "Stuxnet."
-  }
+    name: 'Stuxnet.'
+  };
 
   render() {
     return (
@@ -32,15 +32,17 @@ class Nav extends Component {
         </div>
         <div className="pt-navbar-group pt-align-right">
           <Link className="pt-button pt-minimal" to="/">Home</Link>
-          <Link className="pt-button pt-minimal" to="/buildings">Buildings</Link>
+          <Link className="pt-button pt-minimal" to="/buildings">
+            Buildings
+          </Link>
           <Link className="pt-button pt-minimal" to="/hubs">Hubs</Link>
           <Popover content={menu} position={Position.BOTTOM_RIGHT}>
             <Button className="pt-minimal" iconName="cog" />
           </Popover>
         </div>
       </nav>
-    )
+    );
   }
 }
 
-export default Nav
+export default Nav;

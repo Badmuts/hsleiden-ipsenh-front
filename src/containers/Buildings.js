@@ -16,15 +16,15 @@ class Buildings extends Component {
     fetch('http://localhost:3000/buildings')
       .then(res => res.json())
       .then(buildings => {
-        this.setState({ buildings })
+        this.setState({ buildings });
       })
       .catch(err => {
-        this.setState({ err })
-      })
+        this.setState({ err });
+      });
   }
 
   renderNav() {
-    return (<Nav />)
+    return <Nav />;
   }
 
   render() {
@@ -36,8 +36,12 @@ class Buildings extends Component {
           <nav className="pt-navbar">
             <div className="pt-navbar-group pt-align-left">
               <div className="pt-input-group .modifier">
-                <span className="pt-icon pt-icon-filter"></span>
-                <input type="text" className="pt-input" placeholder="Zoeken..." />
+                <span className="pt-icon pt-icon-filter" />
+                <input
+                  type="text"
+                  className="pt-input"
+                  placeholder="Zoeken..."
+                />
               </div>
             </div>
           </nav>
@@ -45,20 +49,18 @@ class Buildings extends Component {
 
         <div style={style}>
           <h2>Buildings</h2>
-          {buildings ? (
-            buildings.map(building => (
-              <div className="pt-card pt-elevation-0 pt-interactive">
-                <h5>{building.name}</h5>
-                <p>{building.location}</p>
-              </div>
-            ))
-          ) : (
-              <Spinner />
-            )}
+          {buildings
+            ? buildings.map(building =>
+                <div className="pt-card pt-elevation-0 pt-interactive">
+                  <h5>{building.name}</h5>
+                  <p>{building.location}</p>
+                </div>
+              )
+            : <Spinner />}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Buildings
+export default Buildings;

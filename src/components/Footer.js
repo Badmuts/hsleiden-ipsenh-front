@@ -14,8 +14,8 @@ class Footer extends Component {
       <div className="Footer" style={footerStyle}>
         IPSENH - Groep 2 - v{this.props.version || 'DEV'}
       </div>
-    )
+    );
   }
 }
 
-export default Footer
+export default Footer;

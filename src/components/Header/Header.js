@@ -23,11 +23,13 @@ class Header extends Component {
 
     const image = {
       backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      backgroundImage: (this.props.title) ? `url(${this.props.bgImg || img})` : 'none',
+      backgroundImage: this.props.title
+        ? `url(${this.props.bgImg || img})`
+        : 'none',
       backgroundSize: 'cover',
       backgroundPosition: '0 -90px',
       backgroundBlendMode: 'darken',
-      minHeight: (this.props.title) ? '380px' : '180px'
+      minHeight: this.props.title ? '380px' : '180px'
     };
 
     const content = {
@@ -42,21 +44,31 @@ class Header extends Component {
     return (
       <div>
         <div className="header-nav">
-          {this.props.topNav ? (this.props.topNav) : (<Nav />)}
+          {this.props.topNav ? this.props.topNav : <Nav />}
         </div>
         <div style={wrapper}>
-          <div style={colorFilter}></div>
-          <div style={image}></div>
+          <div style={colorFilter} />
+          <div style={image} />
         </div>
         <div style={content}>
-          {this.props.title && (
-            <h1 style={{ background: 'white', padding: '5px 10px 3px 3px', fontFamily: 'PT Sans', fontWeight: '700', fontSize: '4.5em', display: 'inline-block' }}>{this.props.title}</h1>
-          )}
+          {this.props.title &&
+            <h1
+              style={{
+                background: 'white',
+                padding: '5px 10px 3px 3px',
+                fontFamily: 'PT Sans',
+                fontWeight: '700',
+                fontSize: '4.5em',
+                display: 'inline-block'
+              }}
+            >
+              {this.props.title}
+            </h1>}
           {this.props.children}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;

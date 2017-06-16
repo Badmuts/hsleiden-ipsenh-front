@@ -13,12 +13,17 @@
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
+    "prettier": "^1.4.4",
     "react-scripts": "0.9.5"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "scripts": {
     "start": "PORT=9000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --single-quote --write \"src/**/*.js\""
   }
 }
