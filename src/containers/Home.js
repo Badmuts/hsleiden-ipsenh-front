@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Header from './../components/Header';
-import Nav from './../components/Nav.js';
+import React, { Component } from "react";
+import Header from "./../components/Header";
+import Nav from "./../components/Nav.js";
 
 const style = {
-  padding: '30px 50px'
+  padding: "30px 50px"
 };
 
 class Home extends Component {

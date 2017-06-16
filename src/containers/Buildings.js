@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Spinner } from '@blueprintjs/core';
-import Header from './../components/Header';
-import Nav from './../components/Nav';
+import React, { Component } from "react";
+import { Spinner } from "@blueprintjs/core";
+import Header from "./../components/Header";
+import Nav from "./../components/Nav";
 
 const style = {
-  padding: '30px 50px'
+  padding: "30px 50px"
 };
 
 class Buildings extends Component {
@@ -13,7 +13,7 @@ class Buildings extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/buildings')
+    fetch("http://localhost:3000/buildings")
       .then(res => res.json())
       .then(buildings => {
         this.setState({ buildings });

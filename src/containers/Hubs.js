@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   Spinner,
   NonIdealState,
@@ -7,16 +7,16 @@ import {
   Tag,
   Intent,
   Classes
-} from '@blueprintjs/core';
+} from "@blueprintjs/core";
 
-import Header from './../components/Header';
+import Header from "./../components/Header";
 
-import { hubs } from './../endpoints/hubs.js';
+import { hubs } from "./../endpoints/hubs.js";
 
 const style = {
-  padding: '30px 50px',
-  position: 'relative',
-  marginTop: '-100px'
+  padding: "30px 50px",
+  position: "relative",
+  marginTop: "-100px"
 };
 
 class Hubs extends Component {
@@ -38,7 +38,7 @@ class Hubs extends Component {
       <div>
         <Header title="Hubs" />
 
-        <div style={style} className={'row ' + (!hubs.length && 'center-xs')}>
+        <div style={style} className={"row " + (!hubs.length && "center-xs")}>
           {hubs && !err
             ? hubs.map(hub =>
                 <div className="col-xs-6" key={hub.id}>
@@ -50,21 +50,21 @@ class Hubs extends Component {
                   >
                     <div
                       className="pt-card pt-elevation-0 pt-interactive box"
-                      style={{ marginBottom: '15px' }}
+                      style={{ marginBottom: "15px" }}
                     >
                       <h5>
                         <span
                           className="pt-icon-large pt-icon-pulse"
                           style={{
-                            color: hub.status === 'online'
+                            color: hub.status === "online"
                               ? Colors.GREEN2
-                              : hub.status === 'offline'
+                              : hub.status === "offline"
                                 ? Colors.RED2
                                 : Colors.ORANGE2,
-                            paddingRight: '5px'
+                            paddingRight: "5px"
                           }}
                         />
-                        {hub.name}{' '}
+                        {hub.name}{" "}
                         <small className={Classes.TEXT_MUTED}>
                           {hub.serialNumber}
                         </small>
@@ -78,7 +78,7 @@ class Hubs extends Component {
                               className={Classes.MINIMAL}
                               intent={this.statusIntent(hub.status)}
                             >
-                              {' '}<span className="pt-icon-pulse" />{' '}
+                              {" "}<span className="pt-icon-pulse" />{" "}
                               {hub.status}
                             </Tag>
                           </div>
@@ -91,7 +91,7 @@ class Hubs extends Component {
                               className={Classes.MINIMAL}
                               intent={Intent.NONE}
                             >
-                              <span className="pt-icon-graph" />{' '}
+                              <span className="pt-icon-graph" />{" "}
                               {hub.sensors.length}
                             </Tag>
                           </div>
@@ -105,10 +105,10 @@ class Hubs extends Component {
                                   className={Classes.MINIMAL}
                                   intent={Intent.PRIMARY}
                                 >
-                                  <span className="pt-icon-geolocation" />{' '}
+                                  <span className="pt-icon-geolocation" />{" "}
                                   {hub.room.name}
                                 </Tag>
-                              : '-'}
+                              : "-"}
                           </div>
                         </div>
                       </div>
@@ -129,9 +129,9 @@ class Hubs extends Component {
   }
 
   statusIntent(status) {
-    return status === 'online'
+    return status === "online"
       ? Intent.SUCCESS
-      : status === 'offline' ? Intent.DANGER : Intent.WARNING;
+      : status === "offline" ? Intent.DANGER : Intent.WARNING;
   }
 }
 

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 
-import Home from './containers/Home';
-import Buildings from './containers/Buildings';
-import Hubs from './containers/Hubs';
-import HubsDetails from './containers/HubsDetails';
+import Home from "./containers/Home";
+import Buildings from "./containers/Buildings";
+import Hubs from "./containers/Hubs";
+import HubsDetails from "./containers/HubsDetails";
 
-import pkg from './../package.json';
+import pkg from "./../package.json";
 
 class App extends Component {
   render() {

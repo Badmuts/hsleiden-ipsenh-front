@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Header from './../components/Header';
-import HeaderWidget from './../components/HeaderWidget';
-import { Tag, Intent, Classes, Button } from '@blueprintjs/core';
-import { buildings } from './../endpoints/buildings';
-import { save } from './../endpoints/hubs';
-import _ from 'lodash';
+import React, { Component } from "react";
+import Header from "./../components/Header";
+import HeaderWidget from "./../components/HeaderWidget";
+import { Tag, Intent, Classes, Button } from "@blueprintjs/core";
+import { buildings } from "./../endpoints/buildings";
+import { save } from "./../endpoints/hubs";
+import _ from "lodash";
 
 class HubsDetails extends Component {
   state = {
@@ -33,13 +33,13 @@ class HubsDetails extends Component {
 
   handleSelectBuilding(event) {
     let selected = event.target.value;
-    selected = _.filter(this.state.buildings, ['id', selected])[0];
+    selected = _.filter(this.state.buildings, ["id", selected])[0];
     this.setState({ selectedBuilding: selected });
   }
 
   setRoom(event) {
     let selected = event.target.value;
-    selected = _.filter(this.state.selectedBuilding.rooms, ['id', selected])[0];
+    selected = _.filter(this.state.selectedBuilding.rooms, ["id", selected])[0];
     this.setState({ selectedRoom: selected });
   }
 
@@ -81,10 +81,10 @@ class HubsDetails extends Component {
             />
           </div>
         </Header>
-        <div style={{ padding: '30px 50px' }}>
-          <div className="box" style={{ marginBottom: '15px' }}>
+        <div style={{ padding: "30px 50px" }}>
+          <div className="box" style={{ marginBottom: "15px" }}>
             <h2>Sensors</h2>
-            <table className="pt-table pt-bordered" style={{ width: '100%' }}>
+            <table className="pt-table pt-bordered" style={{ width: "100%" }}>
               <thead>
                 <tr>
                   <th>Name</th>
@@ -108,12 +108,12 @@ class HubsDetails extends Component {
             {hub.room.name
               ? <div
                   className="pt-card pt-elevation-0 pt-interactive box"
-                  style={{ marginBottom: '15px' }}
+                  style={{ marginBottom: "15px" }}
                 >
                   <h5>
                     <span
                       className="pt-icon-large pt-icon-home"
-                      style={{ paddingRight: '5px' }}
+                      style={{ paddingRight: "5px" }}
                     />
                     {hub.room.name}
                   </h5>
@@ -125,7 +125,7 @@ class HubsDetails extends Component {
                           className={Classes.MINIMAL}
                           intent={Intent.PRIMARY}
                         >
-                          {' '}<span className="pt-icon-zoom-to-fit" />{' '}
+                          {" "}<span className="pt-icon-zoom-to-fit" />{" "}
                           {hub.room.size} m<sup>2</sup>
                         </Tag>
                       </div>
@@ -135,7 +135,7 @@ class HubsDetails extends Component {
                         <small className="pt-text-muted">Max. Capacity</small>
                         <br />
                         <Tag className={Classes.MINIMAL} intent={Intent.DANGER}>
-                          <span className="pt-icon-segmented-control" />{' '}
+                          <span className="pt-icon-segmented-control" />{" "}
                           {hub.room.maxCapacity}
                         </Tag>
                       </div>
@@ -145,7 +145,7 @@ class HubsDetails extends Component {
                         <small className="pt-text-muted">Occupation</small>
                         <br />
                         <Tag className={Classes.MINIMAL}>
-                          <span className="pt-icon-people" />{' '}
+                          <span className="pt-icon-people" />{" "}
                           {hub.room.occupation}
                         </Tag>
                       </div>
