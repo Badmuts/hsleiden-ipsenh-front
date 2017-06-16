@@ -19,4 +19,12 @@ $ npm test
 $ yarn test
 ```
 
+## Linting/formatting
+Use the [Prettier](https://github.com/prettier/prettier) formatter and the [VSCode plugin](https://github.com/esbenp/prettier-vscode)
+
+Otherwise use the format command
+```sh
+$ yarn run format
+```
+
 For more info about how to use this react app and its tools check [REACT.md](REACT.md)
