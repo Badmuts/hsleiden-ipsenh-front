@@ -10,7 +10,7 @@ class HubsDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hub: {},
+      hub: this.props.location.state.hub,
       buildings: [],
       selectedBuilding: false
     };
