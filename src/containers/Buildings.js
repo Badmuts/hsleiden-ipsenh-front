@@ -39,7 +39,7 @@ class Buildings extends Component {
         <Header topNav={this.renderNav()} title="Buildings">
           <nav className="pt-navbar">
             <div className="pt-navbar-group pt-align-left">
-              <div className="pt-input-group .modifier">
+              <div className="pt-input-group">
                 <span className="pt-icon pt-icon-filter" />
                 <input
                   type="text"
@@ -47,6 +47,14 @@ class Buildings extends Component {
                   placeholder="Zoeken..."
                 />
               </div>
+            </div>
+            <div className="pt-navbar-group pt-align-right">
+              <Link
+                className="pt-button pt-intent-success pt-icon-add"
+                to="/buildings/create"
+              >
+                New building
+              </Link>
             </div>
           </nav>
         </Header>
