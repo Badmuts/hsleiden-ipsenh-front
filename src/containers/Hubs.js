@@ -95,7 +95,7 @@ class Hubs extends Component {
                               intent={Intent.NONE}
                             >
                               <span className="pt-icon-graph" />{" "}
-                              {hub.sensors.length}
+                              {hub.sensors && hub.sensors.length}
                             </Tag>
                           </div>
                         </div>
