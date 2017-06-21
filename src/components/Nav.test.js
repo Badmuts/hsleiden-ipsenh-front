@@ -14,7 +14,7 @@ it("renders without crashing", () => {
   );
 });
 
-it("shows 3 links", () => {
+it("shows 2 links", () => {
   const nav = shallow(<Nav />);
-  expect(nav.find("Link")).toHaveLength(3);
+  expect(nav.find("Link")).toHaveLength(2);
 });

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import Footer from "./components/Footer";
 
@@ -11,8 +11,7 @@ import {
   Rooms,
   Room,
   Hubs,
-  HubsDetails,
-  Home
+  HubsDetails
 } from "./containers";
 
 import pkg from "./../package.json";
@@ -23,7 +22,7 @@ class App extends Component {
       <Router>
         <div>
           <div className="App">
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={() => <Redirect to="/buildings" />} />
             <Route exact path="/buildings" component={Buildings} />
             <Route
               exact
