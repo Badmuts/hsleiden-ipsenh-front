@@ -34,7 +34,6 @@ class Nav extends Component {
           <div className="pt-navbar-heading">{this.state.name}</div>
         </div>
         <div className="pt-navbar-group pt-align-right">
-          <Link className="pt-button pt-minimal" to="/">Home</Link>
           <Link className="pt-button pt-minimal" to="/buildings">
             Buildings
           </Link>
