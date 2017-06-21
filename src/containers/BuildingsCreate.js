@@ -13,7 +13,6 @@ class BuildingsCreate extends Component {
     this.state = { name: "", location: "" };
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this);
-    console.log(this.props);
   }
 
   componentDidMount() {
