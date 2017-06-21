@@ -7,7 +7,7 @@ it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <MemoryRouter>
-      <HubsDetails />
+      <HubsDetails location={{ state: { hub: { sensors: [] } } }} />
     </MemoryRouter>,
     div
   );
