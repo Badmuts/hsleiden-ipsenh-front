@@ -8,6 +8,7 @@ services:
     labels:
       - "traefik.backend=front-production"
       - "traefik.frontend.rule=Host:front.ipsenh.daan.codes"
+      - "traefik.frontend.rule=Host:ipsenh.daan.codes"
       - "traefik.enable=true"
       - "traefik.port=80"
     restart: unless-stopped
