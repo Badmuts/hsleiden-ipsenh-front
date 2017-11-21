@@ -6,10 +6,10 @@ services:
     ports:
       - 80
     labels:
-      - "traefik.backend=front-staging"
-      - "traefik.frontend.rule=Host:staging.front.ipsenh.daan.codes"
-      - "traefik.enable=true"
-      - "traefik.port=80"
+      traefik.backend: "front-staging"
+      traefik.frontend.rule: "Host:staging.front.ipsenh.daan.codes"
+      traefik.enable: "true"
+      traefik.port: "80"
     restart: unless-stopped
 
 networks:
